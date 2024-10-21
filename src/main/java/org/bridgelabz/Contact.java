@@ -2,6 +2,7 @@ package org.bridgelabz;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class Contact {
@@ -69,6 +70,45 @@ public class Contact {
             System.out.println("Contact updated successfully.");
         } else {
             System.out.println("No contact found with the given email.");
+        }
+    }
+
+    // Method to delete contact from database
+    public void deleteContactFromDatabase(Connection connection) throws SQLException {
+        String query = "DELETE FROM contacts WHERE email = ?";
+        PreparedStatement preparedStatement = connection.prepareStatement(query);
+        preparedStatement.setString(1, email);
+
+        int rowsAffected = preparedStatement.executeUpdate();
+        if (rowsAffected > 0) {
+            System.out.println("Contact deleted successfully.");
+        } else {
+            System.out.println("No contact found with the given email.");
+        }
+    }
+
+    // Method to read (retrieve) a contact from the database
+    public static Contact getContactFromDatabase(Connection connection, String email) throws SQLException {
+        String query = "SELECT * FROM contacts WHERE email = ?";
+        PreparedStatement preparedStatement = connection.prepareStatement(query);
+        preparedStatement.setString(1, email);
+        ResultSet resultSet = preparedStatement.executeQuery();
+
+        if (resultSet.next()) {
+            // Extract data from the result set and create a Contact object
+            String firstName = resultSet.getString("first_name");
+            String lastName = resultSet.getString("last_name");
+            String address = resultSet.getString("address");
+            String city = resultSet.getString("city");
+            String state = resultSet.getString("state");
+            String zip = resultSet.getString("zip");
+            String phoneNumber = resultSet.getString("phone_number");
+
+            // Create and return the Contact object
+            return new Contact(firstName, lastName, address, city, state, zip, phoneNumber, email);
+        } else {
+            System.out.println("No contact found with the given email.");
+            return null;
         }
     }
 }

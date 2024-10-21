@@ -32,13 +32,24 @@ public class AddressBook {
 
             System.out.println("Contacts saved to the database!");
 
-            Contact contactToUpdate = new Contact("John", "Doe", "321 Maple Street", "Springfield", "IL", "62702", "555-9876", "alice.johnson@example.com");
+            Contact contactToUpdate = new Contact("Balaji", "Sapkal", "321 Maple Street", "Springfield", "IL", "62702", "555-9876", "alice.johnson@example.com");
 
             // Update the contact in the database
             contactToUpdate.updateContactInDatabase(connection);
 
-            // Close the connection
-            connection.close();
+            // Fetch and display a contact from the database
+            Contact retrievedContact = Contact.getContactFromDatabase(connection, "balajisapkal3062001@gmail.com");
+            if (retrievedContact != null) {
+                System.out.println("Retrieved contact:");
+                retrievedContact.displayContact();
+            }
+
+            // Deleting a contact from the database
+            if (retrievedContact != null) {
+                retrievedContact.deleteContactFromDatabase(connection);
+            }
+
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
