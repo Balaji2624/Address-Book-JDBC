@@ -21,7 +21,7 @@ public class AddressBook {
             System.out.println("Connected to the database!");
 
             // Creating contacts
-            Contact contact1 = new Contact("John", "Doe", "123 Elm Street", "Springfield", "IL", "62701", "555-1234", "john.doe@example.com");
+            Contact contact1 = new Contact("Balaji", "Sapkal", "At Deulgaon Raja", "Buldhana", "IL", "62701", "555-1234", "balajisapkal302001@gmail.com");
             Contact contact2 = new Contact("Jane", "Smith", "456 Oak Street", "Metropolis", "NY", "10001", "555-5678", "jane.smith@example.com");
             Contact contact3 = new Contact("Alice", "Johnson", "789 Pine Street", "Gotham", "NJ", "07001", "555-4321", "alice.johnson@example.com");
 
