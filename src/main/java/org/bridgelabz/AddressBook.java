@@ -32,6 +32,11 @@ public class AddressBook {
 
             System.out.println("Contacts saved to the database!");
 
+            Contact contactToUpdate = new Contact("John", "Doe", "321 Maple Street", "Springfield", "IL", "62702", "555-9876", "alice.johnson@example.com");
+
+            // Update the contact in the database
+            contactToUpdate.updateContactInDatabase(connection);
+
             // Close the connection
             connection.close();
         } catch (SQLException e) {

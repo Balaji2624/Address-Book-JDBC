@@ -51,5 +51,25 @@ public class Contact {
 
         preparedStatement.executeUpdate();
     }
+
+    public void updateContactInDatabase(Connection connection) throws SQLException {
+        String query = "UPDATE contacts SET first_name = ?, last_name = ?, address = ?, city = ?, state = ?, zip = ?, phone_number = ? WHERE email = ?";
+        PreparedStatement preparedStatement = connection.prepareStatement(query);
+        preparedStatement.setString(1, firstName);
+        preparedStatement.setString(2, lastName);
+        preparedStatement.setString(3, address);
+        preparedStatement.setString(4, city);
+        preparedStatement.setString(5, state);
+        preparedStatement.setString(6, zip);
+        preparedStatement.setString(7, phoneNumber);
+        preparedStatement.setString(8, email);
+
+        int rowsAffected = preparedStatement.executeUpdate();
+        if (rowsAffected > 0) {
+            System.out.println("Contact updated successfully.");
+        } else {
+            System.out.println("No contact found with the given email.");
+        }
+    }
 }
 
